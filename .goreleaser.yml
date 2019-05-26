@@ -7,18 +7,22 @@ before:
     # you may remove this if you don't need go generate
     # - go generate ./...
 builds:
-- env:
-  - CGO_ENABLED=0
-- ldflags:
-  - -s -w
+  -
+    id: "dejwt-build"
+    env:
+      - CGO_ENABLED=0
+    ldflags:
+      - -s -w
 archives:
-- replacements:
-    darwin: Darwin
-    linux: Linux
-    windows: Windows
-    386: i386
-    amd64: x86_64
-- name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+  -
+    id: dejwt-arch
+    replacements:
+      darwin: Darwin
+      linux: Linux
+      windows: Windows
+      386: i386
+      amd64: x86_64
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
 checksum:
   name_template: '{{ .ProjectName }}_checksums.txt'
 snapshot:
